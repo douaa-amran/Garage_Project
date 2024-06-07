@@ -64,15 +64,12 @@
                                         <a href={{ route('mechanics.edit', $mechanic->id) }}><button type="button"><i
                                                     class="fa-solid fa-pen-to-square fa-lg"
                                                     style="color: #27a305;"></i></button></a>
-                                        <form action="{{ route('mechanics.destroy', $mechanic->id) }}" method="POST"
-                                            style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"><i class="fa-solid fa-trash fa-lg"
-                                                    style="color: #d01616;"></i></button>
-                                        </form>
+                                        <button type="button" data-modal-target="delete-modal-{{ $mechanic->id }}"
+                                            data-modal-toggle="delete-modal-{{ $mechanic->id }}"><i
+                                                class="fa-solid fa-trash fa-lg" style="color: #d01616;"></i></button>
                                     </td>
                                 </tr>
+                                <x-delete-modal :id="$mechanic->id" route="mechanics" />
                             @endforeach
                         </tbody>
                     </table>

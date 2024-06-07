@@ -27,7 +27,7 @@
                             <i class="fa-solid fa-magnifying-glass" style="color: #6b7280;"></i>
                         </button>
                     </form>
-                    
+
                 </div>
             </div>
             <div>
@@ -71,15 +71,12 @@
                                     <a href="{{ route('vehicles.edit', $vehicle->id) }}"><button type="button"><i
                                                 class="fa-solid fa-pen-to-square fa-lg"
                                                 style="color: #27a305;"></i></button></a>
-                                    <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST"
-                                        style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">
-                                            <i class="fa-solid fa-trash fa-lg" style="color: #d01616;"></i></button>
-                                    </form>
+                                    <button type="button" data-modal-target="delete-modal-{{ $vehicle->id }}"
+                                        data-modal-toggle="delete-modal-{{ $vehicle->id }}"><i
+                                            class="fa-solid fa-trash fa-lg" style="color: #d01616;"></i></button>
                                 </td>
                             </tr>
+                            <x-delete-modal :id="$vehicle->id" route="vehicles" />
                         @endforeach
                     </tbody>
                 </table>
