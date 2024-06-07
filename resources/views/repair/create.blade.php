@@ -1,4 +1,14 @@
-@extends('admin.dashboard')
+@php
+    if (auth()->user()->role == 'Admin') {
+        $page = 'admin.dashboard';
+    } elseif (auth()->user()->role == 'Client') {
+        $page = 'client.dashboard';
+    } elseif (auth()->user()->role == 'Mechanic') {
+        $page = 'mechanic.dashboard';
+    }
+@endphp
+
+@extends($page)
 
 @section('content')
     <div class="flex flex-col justify-center items-center max-w-screen-md px-4 sm:px-6 md:max-w-screen-xl">

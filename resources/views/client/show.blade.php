@@ -1,7 +1,18 @@
-@extends('admin.dashboard')
+@php
+    if (auth()->user()->role == 'Admin') {
+        $page = 'admin.dashboard';
+    } elseif (auth()->user()->role == 'Client') {
+        $page = 'client.dashboard';
+    } elseif (auth()->user()->role == 'Mechanic') {
+        $page = 'mechanic.dashboard';
+    }
+@endphp
+
+@extends($page)
 
 @section('content')
     <div class="flex flex-col justify-center items-center max-w-screen-md px-4 sm:px-6 md:max-w-screen-xl">
+        @if (auth()->user()->role == "Admin")
         <div class="w-full flex justify-start">
             <a href={{ route('clients.index') }}><i class="fa-solid fa-arrow-left" style="color: #2e2e2e;"></i></a>
         </div>
@@ -30,6 +41,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <div class="p-4 self-end">
             <a href={{ route('repairs.create', $client->id) }}><button type="button" data-modal-target="default-modal"

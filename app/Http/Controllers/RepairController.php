@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mechanic;
+use App\Models\Client;
 use App\Models\Repair;
-use App\Models\Reparation;
 use App\Models\Vehicle;
+use App\Models\Mechanic;
 use Illuminate\Http\Request;
 
 class RepairController extends Controller
@@ -13,8 +13,18 @@ class RepairController extends Controller
     // Display all repairs
     public function index()
     {
-        $repairs = Repair::all();
-        return view('repair.index', compact('repairs'));
+        $user = auth()->user();
+
+        if ($user->role === 'admin') {
+            // Fetch all repairs if the user is an admin
+            $repairs = Repair::all();
+        } else {
+            // Fetch only the repairs related to the logged-in user if the user is a client
+            $client = Client::where('userId', $user->id)->first();
+            $repairs = Repair::where('clientId', $client->id)->get();
+        }
+
+        return view('client.show', compact('client','repairs'));
     }
 
     // Show the form to create a new repair
@@ -43,7 +53,7 @@ class RepairController extends Controller
 
         Repair::create($validatedData);
 
-        return redirect()->route('clients.show',$validatedData['clientId'])->with('success', 'Repair created successfully.');
+        return redirect()->route('clients.show', $validatedData['clientId'])->with('success', 'Repair created successfully.');
     }
 
 
@@ -79,7 +89,7 @@ class RepairController extends Controller
         $repair->update($validatedData);
 
         // Redirect to the index page with success message
-        return redirect()->route('clients.show',$validatedData['clientId'])->with('success', 'Repair created successfully.');
+        return redirect()->route('clients.show', $validatedData['clientId'])->with('success', 'Repair created successfully.');
     }
 
     public function show($id)

@@ -32,7 +32,8 @@
             </div>
             <form action="{{ route('clients.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <label for="file" class="py-5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent bg-primaryBlack text-white hover:bg-black">
+                <label for="file"
+                    class="py-5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent bg-primaryBlack text-white hover:bg-black">
                     <i class="fa-solid fa-file-import fa-lg"></i>
                 </label>
                 <input type="file" id="file" name="file" style="display: none;" onchange="this.form.submit()">
@@ -78,15 +79,12 @@
                                     <a href={{ route('clients.edit', $client->id) }}><button type="button"><i
                                                 class="fa-solid fa-pen-to-square fa-lg"
                                                 style="color: #27a305;"></i></button></a>
-                                    <form action="{{ route('clients.destroy', $client->id) }}" method="POST"
-                                        style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"><i class="fa-solid fa-trash fa-lg"
-                                                style="color: #d01616;"></i></button>
-                                    </form>
+                                    <button type="button" data-modal-target="delete-modal-{{ $client->id }}"
+                                        data-modal-toggle="delete-modal-{{ $client->id }}"><i
+                                            class="fa-solid fa-trash fa-lg" style="color: #d01616;"></i></button>
                                 </td>
                             </tr>
+                            <x-delete-modal :id="$client->id" route="clients" />
                         @endforeach
                     </tbody>
                 </table>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <style>
         /* Set maximum width for the content of the first column */
         td {
@@ -35,7 +36,7 @@
         </svg>
     </button>
 
-    <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <nav class="fixed top-0 z-40 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <div class="px-3 py-3 lg:px-5 lg:pl-3">
             <div class="flex items-center justify-between">
                 <div class="flex items-center justify-start rtl:justify-end">
@@ -51,26 +52,18 @@
                         </svg>
                     </button>
                     <a href="https://flowbite.com" class="flex ms-2 md:me-24">
-                        <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" />
-                        <span
-                            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
+                        <img src="{{ asset('assets/logo.png') }}" class="h-12" alt="FlowBite Logo" />
                     </a>
                 </div>
 
-                <div class="flex items-center">
-                    <div class="flex items-center ms-3">
-                        <form class="max-w-sm mx-auto mr-3">
-                            <select id="language-form"
-                                class="py-3 px-4 inline-flex self-end items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent bg-primaryBlack text-white hover:bg-black"
-                                onchange="changeLanguage(this)">
-                                <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English
-                                </option>
-                                <option value="fr" {{ app()->getLocale() == 'fr' ? 'selected' : '' }}>French
-                                </option>
-                                <option value="es" {{ app()->getLocale() == 'es' ? 'selected' : '' }}>Spanish
-                                </option>
-                            </select>
-                        </form>
+                <div class="flex items-center mr-5">
+                    <div class="flex gap-4 justify-center items-center ms-3">
+                        <img src="{{ asset('assets/profile.webp') }}" class='h-10 w-10 rounded-full' alt="profile image">
+                        <div>
+                          <p class="font-bold ">{{auth()->user()->username}}</p>
+                        <small>{{auth()->user()->email}}</small>  
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -86,6 +79,7 @@
     </div>
 
     <script src="./node_modules/preline/dist/preline.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         document.getElementById('sidebar-toggle').addEventListener('click', function(event) {
