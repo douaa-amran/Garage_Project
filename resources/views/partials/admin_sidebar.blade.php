@@ -42,9 +42,9 @@
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <button type="submit" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                             <i class="fa-solid fa-right-from-bracket fa-lg" style="color: #2e2e2e;"></i>
-                            <span class="flex-1 ms-3 whitespace-nowrap">Sign Out</span>
+                            <span class="flex-1 ms-3 text-left whitespace-nowrap">Sign Out</span>
                         </button>
                     </form>
                     

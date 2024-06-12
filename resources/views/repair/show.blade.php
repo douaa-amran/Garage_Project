@@ -16,7 +16,6 @@
             <a href="{{ route('clients.show', $repair->clientId) }}"><i class="fa-solid fa-arrow-left"
                     style="color: #2e2e2e;"></i></a>
         </div>
-        <p>{{$repair->clientId}}</p>
         @if (auth()->user()->role == 'Admin')
             <div class="container mx-auto my-8 p-7 border rounded-xl shadow-lg">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-9 gap-y-4">
